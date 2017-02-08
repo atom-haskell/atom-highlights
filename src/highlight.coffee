@@ -43,11 +43,16 @@ updateScopeStack = (scopeStack, desiredScopes, html) ->
 
 
 module.exports =
-highlightSync = ({fileContents, scopeName, nbsp, lineDivs, editorDiv} = {}) ->
+highlightSync = (options = {}) ->
   registry = atom.grammars
+  {fileContents, scopeName, nbsp, lineDivs, editorDiv,
+    wrapCode, editorDivTag, editorDivClass} = options
   nbsp ?= true
   lineDivs ?= false
   editorDiv ?= false
+  wrapCode ?= false
+  editorDivTag ?= 'div'
+  editorDivClass ?= 'editor editor-colors'
 
   grammar = registry.grammarForScopeName(scopeName)
   return unless grammar?
@@ -64,7 +69,8 @@ highlightSync = ({fileContents, scopeName, nbsp, lineDivs, editorDiv} = {}) ->
   escape = if nbsp then escapeStringNbsp else escapeString
 
   html = ''
-  html = '<div class="editor editor-colors">' if editorDiv
+  html = "<#{editorDivTag} class=\"#{editorDivClass}\">" if editorDiv
+  html += "<code>" if wrapCode
   for tokens in lineTokens
     scopeStack = []
     html += '<div class="line">' if lineDivs
@@ -77,5 +83,6 @@ highlightSync = ({fileContents, scopeName, nbsp, lineDivs, editorDiv} = {}) ->
     html = popScope(scopeStack, html) while scopeStack.length > 0
     html += '\n'
     html += '</div>' if lineDivs
-  html += '</div>' if editorDiv
+  html += "</code>" if wrapCode
+  html += "</#{editorDivTag}>" if editorDiv
   html
