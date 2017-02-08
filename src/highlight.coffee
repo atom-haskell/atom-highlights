@@ -1,4 +1,5 @@
 _ = require 'underscore-plus'
+compareVersions = require('compare-versions')
 
 escapeString = (string, nbsp) ->
   string.replace /[&"'<> ]/g, (match) ->
@@ -62,7 +63,8 @@ highlightSync = ({fileContents, scopeName, nbsp, lineDivs, editorDiv} = {}) ->
     html += '<div class="line">' if lineDivs
     for {value, scopes} in tokens
       value = ' ' unless value
-      scopes = scopes.map (s) -> "syntax--#{s.replace(/\./g, '.syntax--')}"
+      if compareVersions(atom.getVersion(), '1.13.0') >= 0
+        scopes = scopes.map (s) -> "syntax--#{s.replace(/\./g, '.syntax--')}"
       html = updateScopeStack(scopeStack, scopes, html)
       html += "<span>#{escapeString(value, nbsp)}</span>"
     html = popScope(scopeStack, html) while scopeStack.length > 0
