@@ -44,7 +44,7 @@ updateScopeStack = (scopeStack, desiredScopes, html) ->
 
 module.exports =
 highlightSync = ({fileContents, scopeName, nbsp, lineDivs, editorDiv} = {}) ->
-  registry ?= atom.grammars
+  registry = atom.grammars
   nbsp ?= true
   lineDivs ?= false
   editorDiv ?= false
