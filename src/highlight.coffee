@@ -1,7 +1,17 @@
 _ = require 'underscore-plus'
 compareVersions = require('compare-versions')
 
-escapeString = (string, nbsp) ->
+escapeString = (string) ->
+  string.replace /[&"'<>]/g, (match) ->
+    switch match
+      when '&' then '&amp;'
+      when '"' then '&quot;'
+      when "'" then '&#39;'
+      when '<' then '&lt;'
+      when '>' then '&gt;'
+      else match
+
+escapeStringNbsp = (string) ->
   string.replace /[&"'<> ]/g, (match) ->
     switch match
       when '&' then '&amp;'
@@ -9,7 +19,7 @@ escapeString = (string, nbsp) ->
       when "'" then '&#39;'
       when '<' then '&lt;'
       when '>' then '&gt;'
-      when ' ' then (if nbsp then '&nbsp;' else ' ')
+      when ' ' then '&nbsp;'
       else match
 
 pushScope = (scopeStack, scope, html) ->
@@ -56,6 +66,8 @@ highlightSync = ({fileContents, scopeName, nbsp, lineDivs, editorDiv} = {}) ->
     if lastLineTokens.length is 1 and lastLineTokens[0].value is ''
       lineTokens.pop()
 
+  escape = if nbsp then escapeStringNbsp else escapeString
+
   html = ''
   html = '<div class="editor editor-colors">' if editorDiv
   for tokens in lineTokens
@@ -66,7 +78,7 @@ highlightSync = ({fileContents, scopeName, nbsp, lineDivs, editorDiv} = {}) ->
       if compareVersions(atom.getVersion(), '1.13.0') >= 0
         scopes = scopes.map (s) -> "syntax--#{s.replace(/\./g, '.syntax--')}"
       html = updateScopeStack(scopeStack, scopes, html)
-      html += "<span>#{escapeString(value, nbsp)}</span>"
+      html += "<span>#{escape(value)}</span>"
     html = popScope(scopeStack, html) while scopeStack.length > 0
     html += '\n'
     html += '</div>' if lineDivs
