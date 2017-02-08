@@ -1,0 +1,21 @@
+{
+  "name": "atom-highlight",
+  "version": "0.1.0",
+  "description": "Minimal highlighting in Atom without atom-text-editor",
+  "main": "./lib/highlight.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "coffee -o lib -c src/*.coffee",
+    "preversion": "preversion.coffee || exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atom-haskell/atom-highlights.git"
+  },
+  "author": "Nikolay Yakimov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atom-haskell/atom-highlights/issues"
+  },
+  "homepage": "https://github.com/atom-haskell/atom-highlights#readme"
+}
