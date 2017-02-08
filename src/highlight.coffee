@@ -1,26 +1,21 @@
 _ = require 'underscore-plus'
 compareVersions = require('compare-versions')
 
+escapeChar = (match) ->
+  switch match
+    when '&' then '&amp;'
+    when '"' then '&quot;'
+    when "'" then '&#39;'
+    when '<' then '&lt;'
+    when '>' then '&gt;'
+    when ' ' then '&nbsp;'
+    else match
+
 escapeString = (string) ->
-  string.replace /[&"'<>]/g, (match) ->
-    switch match
-      when '&' then '&amp;'
-      when '"' then '&quot;'
-      when "'" then '&#39;'
-      when '<' then '&lt;'
-      when '>' then '&gt;'
-      else match
+  string.replace /[&"'<>]/g, escapeChar
 
 escapeStringNbsp = (string) ->
-  string.replace /[&"'<> ]/g, (match) ->
-    switch match
-      when '&' then '&amp;'
-      when '"' then '&quot;'
-      when "'" then '&#39;'
-      when '<' then '&lt;'
-      when '>' then '&gt;'
-      when ' ' then '&nbsp;'
-      else match
+  string.replace /[&"'<> ]/g, escapeChar
 
 pushScope = (scopeStack, scope, html) ->
   scopeStack.push(scope)
