@@ -46,16 +46,17 @@ module.exports =
 highlightSync = (options = {}) ->
   registry = atom.grammars
   {fileContents, scopeName, nbsp, lineDivs, editorDiv,
-    wrapCode, editorDivTag, editorDivClass} = options
+    wrapCode, editorDivTag, editorDivClass, nullScope} = options
   nbsp ?= true
   lineDivs ?= false
   editorDiv ?= false
   wrapCode ?= false
   editorDivTag ?= 'div'
   editorDivClass ?= 'editor editor-colors'
+  nullScope ?= 'text.plain.null-grammar'
 
-  grammar = registry.grammarForScopeName(scopeName)
-  return unless grammar?
+  grammar = registry.grammarForScopeName(scopeName) ? (registry.grammarForScopeName(nullScope) if nullScope)
+  throw new Error("Grammar #{scopeName} not found, and no #{nullScope} grammar") unless grammar?
 
   lineTokens = grammar.tokenizeLines(fileContents)
 
