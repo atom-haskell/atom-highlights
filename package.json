@@ -1,6 +1,6 @@
 {
   "name": "atom-highlight",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Minimal highlighting in Atom without atom-text-editor",
   "main": "./lib/highlight.js",
   "scripts": {
