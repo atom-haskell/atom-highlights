@@ -117,8 +117,8 @@ export = function highlightSync(
     while (scopeStack.length > 0) {
       popScope(scopeStack, html)
     }
-    html.push('\n')
     if (o.lineDivs) html.push('</div>')
+    html.push('\n')
   }
   if (o.wrapCode) html.push('</code>')
   if (o.editorDiv) html.push(`</${o.editorDivTag}>`)
