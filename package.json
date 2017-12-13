@@ -3,6 +3,7 @@
   "version": "0.4.0",
   "description": "Minimal highlighting in Atom without atom-text-editor",
   "main": "./lib/highlight.js",
+  "types": "./lib/highlight.d.ts",
   "scripts": {
     "test": "rm -r lib/; node_modules/.bin/tsc && apm test",
     "prepublish": "npm run test"
