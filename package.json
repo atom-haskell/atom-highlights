@@ -4,9 +4,8 @@
   "description": "Minimal highlighting in Atom without atom-text-editor",
   "main": "./lib/highlight.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "coffee -o lib -c src/*.coffee",
-    "preversion": "preversion.coffee || exit 0"
+    "test": "rm -r lib/; node_modules/.bin/tsc && apm test",
+    "prepublish": "npm run test"
   },
   "repository": {
     "type": "git",
