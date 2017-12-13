@@ -1,3 +1,6 @@
+## 0.4.1
+* Add types to package.json
+
 ## 0.4.0
 * Update test\/publish scripts
 * Add spec to npmignore
