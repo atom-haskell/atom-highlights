@@ -50,7 +50,7 @@ function updateScopeStack(scopeStack: string[], desiredScopes: string[], html: s
     popScope(scopeStack, html)
   }
   // push on top of common prefix until scopeStack is desiredScopes
-  for (let j = lasti; j <= desiredScopes.length; ++j) {
+  for (let j = lasti; j < desiredScopes.length; ++j) {
     pushScope(scopeStack, desiredScopes[j], html)
   }
 }
