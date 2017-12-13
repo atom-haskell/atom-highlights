@@ -15,7 +15,10 @@ escapeString = (string) ->
   string.replace /[&"'<>]/g, escapeChar
 
 escapeStringNbsp = (string) ->
-  string.replace /[&"'<> ]/g, escapeChar
+  tmp = string.replace(/[&"'<>]/g, escapeChar);
+  tmp = tmp.replace(/  /g, "&nbsp; ")
+  tmp = tmp.replace(/  /g, " &nbsp;")
+  tmp.replace(/^ | $/mg, "&nbsp;")
 
 pushScope = (scopeStack, scope, html) ->
   scopeStack.push(scope)
