@@ -19,14 +19,14 @@
   },
   "homepage": "https://github.com/atom-haskell/atom-highlights#readme",
   "dependencies": {
-    "compare-versions": "^3.0.0",
+    "compare-versions": "^3.1.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "@types/atom": "^1.21.4",
-    "@types/underscore": "^1.8.3",
-    "atom-haskell-tslint-rules": "0.0.7",
+    "@types/atom": "^1.22.3",
+    "@types/underscore": "^1.8.5",
+    "atom-haskell-tslint-rules": "0.1.1",
     "tslint": "^5.8.0",
-    "typescript": "^2.5.3"
+    "typescript": "^2.6.2"
   }
 }

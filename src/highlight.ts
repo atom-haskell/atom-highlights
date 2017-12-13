@@ -1,5 +1,6 @@
 import _ = require('underscore')
 import compareVersions = require('compare-versions')
+import {} from 'atom'
 
 function escapeChar(match: string): string {
   switch (match) {
@@ -110,7 +111,7 @@ export = function highlightSync(
       if (compareVersions(atom.getVersion(), '1.13.0') >= 0) {
         newScopes = scopes.map((s: string) => `syntax--${s.replace(/\./g, '.syntax--')}`)
       }
-      updateScopeStack(scopeStack, scopes, html)
+      updateScopeStack(scopeStack, newScopes, html)
       html.push(`<span>${escape(value)}</span>`)
     }
     while (scopeStack.length > 0) {
