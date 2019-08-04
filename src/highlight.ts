@@ -79,7 +79,7 @@ export = function highlightSync(
     nullScope: string
   }>,
 ): string {
-  const registry = atom.grammars
+  const registry = atom.grammars.textmateRegistry || atom.grammars
   const o = {...defaultOptions, ...options}
 
   const grammar = registry.grammarForScopeName(o.scopeName) || (o.nullScope ? registry.grammarForScopeName(o.nullScope) : undefined)
